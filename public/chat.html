@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AegisChat - Secure E2EE Messaging</title>
+<link rel="stylesheet" href="styles.css?v=20260825b">
+</head>
+<body>
+
+<div class="app-header">
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo" id="logoBtn" role="button" tabindex="0" title="Refresh chat">
+    <div class="logo-icon"></div>
+    AegisChat
+  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu"><i data-lucide="menu"></i></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#" class="active" id="navHome">Beranda</a></li>
+    <li><a href="#" id="navChat">Chat</a></li>
+    <li><a href="#" id="navContacts">Contacts<span class="nav-badge" id="inviteBadge" hidden></span></a></li>
+    <li><a href="#" id="navProfile">Profile</a></li>
+    <li><a href="#" id="navGuide">Guide</a></li>
+    <li class="nav-sep" aria-hidden="true"></li>
+    <li><span class="nav-time" id="timeDisplay">--:--</span></li>
+    <li class="nav-user"><span class="avatar-initial sm" id="navAvatar">?</span><span id="currentUsername">User</span></li>
+    <li><button class="icon-btn logout" title="Logout" aria-label="Logout"><i data-lucide="log-out"></i></button></li>
+  </ul>
+</nav>
+</div>
+
+<!-- Main Layout -->
+<div class="main" id="mainContent">
+
+  <!-- Center: Chat Area -->
+  <section class="chat-area">
+    <div class="chat-header">
+      <div class="chat-partner">
+        <div class="avatar-initial" id="chatPartnerAvatar">?</div>
+        <div class="chat-header-info">
+          <h3 id="chatPartnerName">Select a contact</h3>
+          <p class="partner-status"><span class="status-dot offline" id="chatPartnerDot"></span><span id="chatPartnerStatus">Open Contacts menu to select a chat partner</span></p>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button class="ghost-btn" id="toggleBulkMode" style="display:none;"><i data-lucide="trash-2"></i><span>Select Messages</span></button>
+        <button class="ghost-btn danger" id="bulkDeleteBtn" style="display:none;">Delete</button>
+        <button class="ghost-btn" id="cancelBulkMode" style="display:none;">Cancel</button>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="empty-state"><i data-lucide="lock"></i><p>End-to-end encrypted conversation. Send the first message.</p></div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="msgInput" placeholder="Type your message...">
+      <label for="fileInput" class="icon-btn file-label" id="fileLabel" title="Attach image"><i data-lucide="paperclip"></i></label>
+      <input type="file" id="fileInput" accept="image/*" style="display:none;">
+      <div class="key-wrap">
+        <i data-lucide="key-round" class="key-ico"></i>
+        <input type="password" id="secretKey" placeholder="Secret Key" autocomplete="off">
+        <button type="button" class="key-toggle" id="keyToggle" aria-label="Show or hide key"><i data-lucide="eye"></i></button>
+      </div>
+      <button class="encrypt-btn" id="encryptBtn"><i data-lucide="lock"></i><span>ENCRYPT</span></button>
+      <button class="send-btn" id="sendBtn" aria-label="Send"><i data-lucide="send"></i></button>
+    </div>
+  </section>
+
+  <!-- Right Sidebar: Profile Info (REMOVED - Now full page) -->
+  
+</div>
+
+<!-- Profile Page (Full Screen) -->
+<!-- Home Page (Full Screen Beranda with Chat Previews) -->
+<div class="home-page" id="homePage" style="display:none;">
+  <div class="home-page-header">
+    <span>Beranda - Chat Previews</span>
+  </div>
+  <div class="home-page-content">
+    <h2 style="margin-bottom:8px; text-align:left;">Daftar Percakapan</h2>
+    <p class="subtitle" style="text-align:left; margin-bottom:20px;">Preview pesan terbaru. Klik untuk membuka chat penuh.</p>
+    <div id="homeChatList" style="display:flex; flex-direction:column; gap:8px;">
+      <div style="color:var(--text-muted); font-size:13px;">Memuat percakapan...</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="profile-page" id="profilePage" style="display:none;">
+  <div class="profile-page-header">
+    <button class="back-btn" id="backFromProfile"><i data-lucide="arrow-left"></i> Back</button>
+    <span>Profile</span>
+    <div style="width:60px;"></div><!-- Spacer -->
+  </div>
+  
+  <div class="profile-page-content">
+    <!-- View Mode -->
+    <div id="profileViewMode">
+      <div class="profile-avatar-large" id="profilePageAvatar" style="cursor:pointer;" title="Click to change avatar">?</div>
+      <div class="profile-name-large" id="profilePageName">Username</div>
+      <div class="profile-username-large" id="profilePageUsername">@username</div>
+      
+      <!-- Edit Button (Only for own profile) -->
+      <div class="profile-edit-actions" id="profileEditActions">
+        <button class="profile-action-btn" id="editProfileBtnPage">✏️ Edit Profile</button>
+      </div>
+      
+      <!-- Block Button (Only for other users) -->
+      <div class="profile-block-actions" id="profileBlockActions" style="display:none;">
+        <button class="profile-block-btn" id="blockUserBtn">🚫 Block User</button>
+      </div>
+
+      <div class="profile-info-section">
+        <div class="info-block">
+          <div class="info-label">Email</div>
+          <div class="info-value" id="profilePageEmail">N/A</div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-label">Encryption</div>
+          <div class="info-value">AES-256 (Client-side)</div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-label">Status</div>
+          <div class="info-value" id="profilePageStatus">Offline</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avatar Picker (Inline, within Profile Page) -->
+    <div id="profileAvatarPicker" style="display:none; padding:20px; width:100%; max-width:500px;">
+      <h3 style="color:#fff; margin-bottom:20px;">Choose Avatar</h3>
+      <div class="avatar-grid" id="profileAvatarGrid"></div>
+      <div style="display:flex;gap:10px;margin-top:20px;">
+        <button class="btn" id="saveProfileAvatarBtn" style="flex:1;">Save Avatar</button>
+        <button class="btn" id="cancelProfileAvatarBtn" style="flex:1;background:#3a3d4a;">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Edit Mode (Inline Form) -->
+    <div id="profileEditMode" style="display:none; padding:20px; width:100%; max-width:500px;">
+      <div id="profileFormSection">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="editUsernameInline" class="profile-input" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="editEmailInline" class="profile-input" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>New Password (leave blank to keep current)</label>
+          <input type="password" id="editPasswordInline" class="profile-input" autocomplete="new-password" placeholder="Min 6 characters">
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" id="editConfirmPasswordInline" class="profile-input" autocomplete="new-password" placeholder="Confirm new password">
+        </div>
+        <div style="display:flex;gap:10px;margin-top:20px;">
+          <button class="btn" id="saveProfileBtnInline" style="flex:1;">Save Changes</button>
+          <button class="btn" id="cancelProfileBtnInline" style="flex:1;background:#3a3d4a;">Cancel</button>
+        </div>
+      </div>
+      
+      <div id="profileOtpSectionInline" style="display:none;">
+        <p style="color:#9ca3af;margin-bottom:16px;">We sent a 6-digit OTP to your email. Enter it below to confirm changes.</p>
+        <div class="form-group">
+          <label>OTP Code</label>
+          <input type="text" id="profileOtpInputInline" class="profile-input" maxlength="6" placeholder="Enter OTP" autocomplete="one-time-code">
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn" id="verifyProfileOtpBtnInline" style="flex:1;">Verify</button>
+          <button class="btn" id="cancelProfileOtpBtnInline" style="flex:1;background:#3a3d4a;">Cancel</button>
+        </div>
+        <div id="profileOtpErrorInline" style="color:#ff6b6b;margin-top:10px;display:none;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contacts Modal -->
+<div class="contacts-modal-overlay" id="contactsModalOverlay">
+  <div class="contacts-modal">
+    <div class="contacts-modal-header">
+      <span>Contacts</span>
+      <button class="contacts-modal-close" id="contactsModalClose" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div class="search-box">
+      <i data-lucide="search"></i>
+      <input type="text" placeholder="Search contacts..." id="searchContactsModal">
+    </div>
+    <div style="display:flex; gap:8px; padding:10px 16px 0;">
+      <button class="ghost-btn" id="newGroupBtn" style="flex:1; justify-content:center;"><i data-lucide="users"></i>New Group</button>
+      <button class="ghost-btn" id="addContactBtn" style="flex:1; justify-content:center;"><i data-lucide="user-plus"></i>Add Contact</button>
+    </div>
+    <div id="addContactForm" style="display:none; padding:12px 16px; border-bottom:1px solid var(--border);">
+      <input type="text" id="addContactInput" placeholder="Search username..." autocomplete="off" style="width:100%; background:#0f0f0f; border:1px solid var(--border); border-radius:8px; padding:8px 12px; color:var(--text); font-size:13px;">
+      <div id="addContactResults" class="member-pick-list"></div>
+    </div>
+    <div id="newGroupForm" style="display:none; padding:12px 16px; border-bottom:1px solid var(--border);">
+      <input type="text" id="groupNameInput" placeholder="Group name" style="width:100%; background:#0f0f0f; border:1px solid var(--border); border-radius:8px; padding:8px 12px; color:var(--text); font-size:13px;">
+      <div id="groupMembersPick" class="member-pick-list"></div>
+      <div style="display:flex; gap:8px; margin-top:10px;">
+        <button class="ghost-btn danger" id="cancelGroupBtn" style="flex:1; justify-content:center;">Cancel</button>
+        <button class="ghost-btn" id="createGroupBtn" style="flex:1; justify-content:center; border-color:var(--primary); color:var(--primary);">Create</button>
+      </div>
+    </div>
+    <div class="groups-label">Groups</div>
+    <div id="groupsList"></div>
+    <div class="groups-label" id="requestsLabel" style="display:none;">Friend Requests</div>
+    <div id="requestsList"></div>
+    <div class="groups-label" id="groupInvitesLabel" style="display:none;">Group Invites</div>
+    <div id="groupInvitesList"></div>
+    <div class="groups-label">Contacts</div>
+    <div id="contactsListModal">
+      <div class="contact" data-user="loading">
+        <div class="contact-avatar">...</div>
+        <div class="contact-info">
+          <div class="contact-name">Loading...</div>
+          <div class="contact-status">Please wait</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Group Info Modal -->
+<div class="contacts-modal-overlay" id="groupInfoOverlay">
+  <div class="contacts-modal" style="max-width:360px;">
+    <div class="contacts-modal-header">
+      <span>Group Info</span>
+      <button class="contacts-modal-close" id="groupInfoClose" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <div style="padding:14px 16px; border-bottom:1px solid var(--border);">
+      <div id="groupInfoName" style="font-weight:700; font-size:16px;"></div>
+      <div id="groupInfoCount" style="color:#9ca3af; font-size:12px; margin-top:2px;"></div>
+    </div>
+    <div class="groups-label">Members</div>
+    <div id="groupMembersList"></div>
+    <div id="adminGroupActions" style="display:none; padding:12px 16px 0;">
+      <button class="ghost-btn" id="addMemberBtn" style="width:100%; justify-content:center;"><i data-lucide="user-plus"></i>Tambah Anggota</button>
+      <div id="addMemberPick" class="member-pick-list" style="display:none;"></div>
+    </div>
+    <div style="padding:12px 16px;">
+      <button class="ghost-btn danger" id="dissolveGroupBtn" style="display:none; width:100%; justify-content:center; margin-bottom:8px;"><i data-lucide="trash-2"></i>Bubarkan Grup</button>
+      <button class="ghost-btn danger" id="leaveGroupBtn" style="width:100%; justify-content:center;"><i data-lucide="log-out"></i>Keluar Grup</button>
+    </div>
+    <div id="adminLeavePick" class="member-pick-list" style="display:none; padding:12px 16px; border-top:1px solid var(--border);"></div>
+  </div>
+</div>
+
+<!-- Guide Modal -->
+<div class="guide-modal-overlay" id="guideModalOverlay">
+  <div class="guide-modal">
+    <div class="contacts-modal-header">
+      <span>User Guide / Panduan</span>
+      <button class="contacts-modal-close" id="guideModalClose" aria-label="Close"><i data-lucide="x"></i></button>
+    </div>
+    <iframe src="guide.html" class="guide-frame" title="User Guide"></iframe>
+  </div>
+</div>
+
+<!-- Secret Key Modal -->
+<div class="contacts-modal-overlay" id="keyModalOverlay">
+  <div class="contacts-modal key-modal">
+    <div class="contacts-modal-header">
+      <span>Secret Key</span>
+    </div>
+    <div class="key-modal-body">
+      <p id="keyModalLabel">Enter your secret key:</p>
+      <input type="password" id="keyModalInput" autocomplete="off">
+      <div class="key-modal-actions">
+        <button id="keyModalCancel">CANCEL</button>
+        <button id="keyModalOk">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lucide Icons -->
+<script src="vendor/lucide.min.js?v=1.34.0"></script>
+<!-- Dialog (styled alert/confirm) -->
+<script src="js/dialog.js?v=20260824l"></script>
+<!-- CryptoJS Library -->
+<script src="vendor/crypto-js.min.js?v=4.2.0"></script>
+<!-- Socket.io Client -->
+<script src="/socket.io/socket.io.js"></script>
+<!-- Crypto Handler -->
+<script src="js/crypto-handler.js?v=20260825a"></script>
+<script src="js/avatars.js?v=20260824j"></script>
+<script src="js/chat-app.js?v=20260825d"></script>
+<script src="js/chat-features.js?v=20260824j"></script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "aegis-chat",
+  "version": "2.0.0",
+  "description": "Secure E2EE Chat Application with OTP Authentication and Manual AES-256 Encryption",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "chat",
+    "e2ee",
+    "websocket",
+    "encryption",
+    "otp",
+    "authentication"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "nodemailer": "9.0.5",
+    "socket.io": "^4.6.1",
+    "sqlite3": "^5.1.6"
+  }
+}

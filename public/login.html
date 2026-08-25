@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login - AegisChat</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="logo">
+    <div class="logo-icon"></div>
+    Aegis<span>Chat</span>
+  </div>
+  
+  <h2>Welcome Back</h2>
+  <p class="subtitle">Login to your secure account</p>
+  
+  <div class="error-msg" id="errorMsg"></div>
+  
+  <form id="loginForm">
+    <div class="form-group">
+      <label>Username/Email</label>
+      <input type="text" id="username" required autocomplete="username">
+    </div>
+    
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" required autocomplete="current-password">
+    </div>
+    
+    <button type="submit" class="btn">LOGIN</button>
+  </form>
+  
+  <div class="switch-mode">
+    Don't have an account? <a href="/">Register</a><br>
+    <a href="/forgot-password" style="margin-top:10px; display:inline-block;">Forgot Password?</a><br>
+    <a href="/guide.html" style="margin-top:10px; display:inline-block;">📖 User Guide / Panduan</a>
+  </div>
+  
+  <button id="clearCacheBtn" style="position:fixed; bottom:20px; right:20px; background:#dc2626; color:#fff; border:0; padding:6px 12px; font-size:12px; cursor:pointer; border-radius:0px; z-index:1000; opacity:0.6;">
+    Clear Cache
+  </button>
+</div>
+
+<script src="js/dialog.js?v=20260824"></script>
+<script src="js/login.js?v=20260825a"></script>
+<script src="js/password-toggle.js?v=20260825a"></script>
+
+</body>
+</html>

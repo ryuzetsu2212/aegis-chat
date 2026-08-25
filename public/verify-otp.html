@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Verify OTP - AegisChat</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="logo">
+    <div class="logo-icon"></div>
+    Aegis<span>Chat</span>
+  </div>
+  
+  <h2>Verify Email</h2>
+  <p class="subtitle">Enter the 6-digit code sent to your email</p>
+  
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="success-msg" id="successMsg"></div>
+  
+  <form id="verifyForm">
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" id="email" required readonly>
+    </div>
+    
+    <div class="form-group">
+      <label>OTP Code</label>
+      <input type="text" id="otp" required maxlength="6" pattern="[0-9]{6}" placeholder="000000" style="font-size:24px; letter-spacing:8px; text-align:center; font-family:monospace;">
+    </div>
+    
+    <button type="submit" class="btn">VERIFY</button>
+  </form>
+  
+  <div class="switch-mode">
+    <a href="/login">Back to Login</a>
+  </div>
+</div>
+
+<script src="js/verify-otp.js?v=20260825a"></script>
+
+</body>
+</html>

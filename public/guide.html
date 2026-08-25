@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Panduan AegisChat | AegisChat Guide</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.guide-wrap { max-width: 860px; margin: 40px auto 80px; padding: 0 20px; }
+.guide-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+.lang-toggle { display: flex; border: 1px solid #3a3d4a; }
+.lang-toggle button { background: transparent; color: #9ca3af; border: none; padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 1px; }
+.lang-toggle button.on { background: #00d4aa; color: #1a1d29; }
+.guide-section { background: #242837; border: 1px solid #3a3d4a; padding: 28px; margin-bottom: 20px; }
+.guide-section h2 { text-align: left; font-size: 19px; margin-bottom: 14px; color: #00d4aa; }
+.guide-section p, .guide-section li { color: #c5c7d0; font-size: 14.5px; line-height: 1.75; }
+.guide-section ol, .guide-section ul { padding-left: 22px; margin: 10px 0; }
+.guide-section li { margin-bottom: 8px; }
+kbd { background: #1a1d29; border: 1px solid #00d4aa; color: #00d4aa; padding: 2px 8px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+.note { background: #1a1d29; border-left: 3px solid #00d4aa; padding: 12px 16px; margin-top: 14px; font-size: 13.5px !important; }
+.warn { border-left-color: #f59e0b; }
+.toc { background: #242837; border: 1px solid #3a3d4a; padding: 24px 28px; margin-bottom: 20px; }
+.toc a { display: block; color: #9ca3af; text-decoration: none; padding: 5px 0; font-size: 14px; }
+.toc a:hover { color: #00d4aa; }
+.step-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+.step-table td { border: 1px solid #3a3d4a; padding: 10px 14px; font-size: 13.5px; color: #c5c7d0; vertical-align: top; }
+.step-table td:first-child { white-space: nowrap; color: #00d4aa; font-weight: 600; }
+.back-login { color: #9ca3af; text-decoration: none; font-size: 13.5px; font-weight: 500; }
+.back-login:hover { color: #00d4aa; }
+.guide-topbar { margin-bottom: 18px; }
+#toTop { position: fixed; right: 24px; bottom: 24px; width: 42px; height: 42px; background: #242837; border: 1px solid #00d4aa; color: #00d4aa; font-size: 18px; cursor: pointer; display: none; z-index: 99; }
+#toTop:hover { background: #00d4aa; color: #1a1d29; }
+body.in-iframe .standalone-only { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="guide-wrap">
+
+  <div class="guide-topbar standalone-only"><a class="back-login" href="/login">← Kembali ke Login</a></div>
+
+  <div class="guide-header">
+    <div class="logo" style="margin-bottom:0;">
+      <div class="logo-icon"></div>
+      <div>Aegis<span>Chat</span> Panduan / Guide</div>
+    </div>
+    <div class="lang-toggle">
+      <button id="btnID" class="on">INDONESIA</button>
+      <button id="btnEN">ENGLISH</button>
+    </div>
+  </div>
+
+  <!-- ================= INDONESIAN ================= -->
+  <div id="lang-id">
+
+    <nav class="toc">
+      <strong style="color:#e4e6eb;">Daftar Isi</strong>
+      <a href="#g-intro">1. Tentang AegisChat</a>
+      <a href="#g-reg">2. Registrasi Akun &amp; Verifikasi OTP</a>
+      <a href="#g-login">3. Login</a>
+      <a href="#g-forgot">4. Lupa Password</a>
+      <a href="#g-contacts">5. Kontak</a>
+      <a href="#g-encrypt">6. Enkripsi Pesan (Manual)</a>
+      <a href="#g-decrypt">7. Dekripsi Pesan</a>
+      <a href="#g-file">8. Kirim Gambar / File</a>
+      <a href="#g-receipt">9. Tanda Pesan Dibaca</a>
+      <a href="#g-delete">10. Hapus Pesan (Satuan &amp; Massal)</a>
+      <a href="#g-profile">11. Profil &amp; Pengaturan Akun</a>
+      <a href="#g-block">12. Blokir Pengguna</a>
+      <a href="#g-security">13. Catatan Keamanan Penting</a>
+      <a href="#g-friends">14. Menambahkan Kontak (Persetujuan)</a>
+      <a href="#g-groups">15. Grup Chat</a>
+    </nav>
+
+    <section class="guide-section" id="g-intro">
+      <h2>1. Tentang AegisChat</h2>
+      <p>AegisChat adalah aplikasi chat real-time dengan enkripsi ujung-ke-ujung (E2EE) yang dikelola <strong>sepenuhnya manual oleh pengguna</strong>, mirip komunikasi PGP, tapi dalam bentuk antarmuka chat.</p>
+      <p>Prinsip utama: server tidak tahu isi pesan Anda. Server hanya menerima, meneruskan, dan menyimpan <em>ciphertext</em> (teks acak hasil enkripsi). Kunci rahasia tidak pernah dikirim ke server.</p>
+    </section>
+
+    <section class="guide-section" id="g-reg">
+      <h2>2. Registrasi Akun &amp; Verifikasi OTP</h2>
+      <ol>
+        <li>Buka halaman depan aplikasi (<code>/</code>); Anda akan disambung form registrasi.</li>
+        <li>Isi <strong>Username</strong>, <strong>Email</strong>, dan <strong>Password</strong> (minimal 6 karakter).</li>
+        <li>Pilih avatar emoji sebagai identitas visual akun Anda.</li>
+        <li>Klik tombol registrasi. Sistem mengirim kode <strong>OTP 6 digit ke email Anda</strong>.</li>
+        <li>Buka email, salin kode OTP, masukkan di halaman verifikasi.</li>
+        <li>Klik verifikasi. Akun aktif dan bisa dipakai login.</li>
+      </ol>
+      <p class="note warn">⚠️ Kode OTP berlaku <strong>10 menit</strong> dan hanya bisa dipakai sekali. Kalau kadaluarsa, daftar ulang atau minta kode baru.</p>
+    </section>
+
+    <section class="guide-section" id="g-login">
+      <h2>3. Login</h2>
+      <ol>
+        <li>Buka <code>/login</code>.</li>
+        <li>Masukkan <strong>Username atau Email</strong> dan <strong>Password</strong>.</li>
+        <li>Klik <kbd>LOGIN</kbd>. Berhasil → langsung diarahkan ke halaman Chat.</li>
+      </ol>
+      <p>Sudah login sebelumnya? Buka <code>/login</code> lagi, Anda otomatis dialihkan ke halaman chat (sesi disimpan di browser).</p>
+    </section>
+
+    <section class="guide-section" id="g-forgot">
+      <h2>4. Lupa Password</h2>
+      <ol>
+        <li>Di halaman login, klik <kbd>Forgot Password?</kbd>.</li>
+        <li>Masukkan email akun Anda.</li>
+        <li>Cek email: kode OTP 6 digit akan dikirim.</li>
+        <li>Masukkan OTP, lalu tentukan password baru (min. 6 karakter).</li>
+        <li>Login dengan password baru.</li>
+      </ol>
+    </section>
+
+    <section class="guide-section" id="g-contacts">
+      <h2>5. Kontak</h2>
+      <ol>
+        <li>Di navbar atas, klik <kbd>Contacts</kbd>. Jendela daftar kontak terbuka.</li>
+        <li>Gunakan kolom pencarian untuk menyaring nama kontak.</li>
+        <li>Klik salah satu kontak untuk membuka percakapan dengannya.</li>
+        <li>Nama partner chat di header area obrolan juga bisa diklik, membuka halaman profilnya.</li>
+      </ol>
+      <p>Status bar di bawah navbar menampilkan waktu lokal Anda dan username yang sedang login.</p>
+    </section>
+
+    <section class="guide-section" id="g-encrypt">
+      <h2>6. Enkripsi Pesan (Manual)</h2>
+      <p>Inilah alur wajib sebelum mengirim pesan:</p>
+      <table class="step-table">
+        <tr><td>Langkah 1</td><td>Tulis pesan pada kolom input paling kiri.</td></tr>
+        <tr><td>Langkah 2</td><td>Masukkan <strong>Secret Key</strong> (kunci rahasia) yang sudah Anda sepakati dengan lawan bicara. Kunci ini <u>tidak pernah dikirim ke server</u>.</td></tr>
+        <tr><td>Langkah 3</td><td>Klik <kbd>ENCRYPT</kbd>. Pesan berubah menjadi ciphertext acak di kolom input.</td></tr>
+        <tr><td>Langkah 4</td><td>Klik tombol <kbd>▶</kbd> untuk mengirim ciphertext tersebut.</td></tr>
+      </table>
+      <p class="note">Algoritma enkripsi: <strong>AES-256</strong> (CryptoJS), diproses 100% di browser Anda. Kolom Secret Key otomatis kosong setelah mengirim.</p>
+    </section>
+
+    <section class="guide-section" id="g-decrypt">
+      <h2>7. Dekripsi Pesan</h2>
+      <ol>
+        <li>Pesan masuk tampil sebagai ciphertext acak, normal dan memang disengaja.</li>
+        <li>Klik tombol <kbd>DECRYPT</kbd> pada balon pesan yang ingin dibaca.</li>
+        <li>Masukkan Secret Key yang sama dengan milik pengirim.</li>
+        <li>Pesan asli muncul menggantikan ciphertext.</li>
+      </ol>
+      <p class="note warn">⚠️ Salah kunci = dekripsi gagal. Pastikan Anda dan lawan bicara memakai Secret Key yang persis sama (termasuk huruf besar/kecil). Sepakati kunci lewat kanal lain (pertemuan langsung, telepon, dll), jangan lewat chat ini sendiri.</p>
+    </section>
+
+    <section class="guide-section" id="g-file">
+      <h2>8. Kirim Gambar / File</h2>
+      <ol>
+        <li>Klik ikon 📁 di samping kolom input.</li>
+        <li>Pilih gambar. Nama file dan ukurannya tampil sebagai pratinjau placeholder.</li>
+        <li>Jangan lupa isi Secret Key, lalu klik <kbd>▶</kbd> untuk mengirim.</li>
+        <li>Gambar tampil di percakapan dan bisa dibuka oleh penerima.</li>
+      </ol>
+    </section>
+
+    <section class="guide-section" id="g-receipt">
+      <h2>9. Tanda Pesan Dibaca</h2>
+      <ul>
+        <li><kbd>✓</kbd>, pesan terkirim, belum dibaca penerima.</li>
+        <li><kbd>✓✓</kbd>, pesan sudah dibaca penerima.</li>
+      </ul>
+    </section>
+
+    <section class="guide-section" id="g-delete">
+      <h2>10. Hapus Pesan</h2>
+      <p><strong>Hapus satu pesan:</strong> arahkan ke balon pesan milik Anda sendiri, klik ikon 🗑️. Pesan langsung hilang.</p>
+      <p><strong>Hapus massal (bulk delete):</strong></p>
+      <ol>
+        <li>Klik tombol <kbd>Select</kbd> di header area chat. Checkbox muncul di setiap pesan Anda yang masih bisa dihapus.</li>
+        <li>Centang semua pesan yang ingin dihapus.</li>
+        <li>Klik <kbd>Delete (n)</kbd> untuk menghapus sekaligus, atau <kbd>Cancel</kbd> untuk batal.</li>
+        <li>Setelah selesai, tombol kembali ke <kbd>Select</kbd>.</li>
+      </ol>
+      <p class="note warn">⚠️ Aturan 24 jam: pesan hanya bisa dihapus dalam rentang <strong>kurang dari 24 jam sejak dikirim</strong>, dan hanya oleh pengirimnya.</p>
+    </section>
+
+    <section class="guide-section" id="g-profile">
+      <h2>11. Profil &amp; Pengaturan Akun</h2>
+      <p>Buka lewat <kbd>Profile</kbd> di navbar, atau klik nama partner chat.</p>
+      <ul>
+        <li><strong>Lihat profil:</strong> avatar besar, nama, dan @username.</li>
+        <li><strong>Ganti avatar:</strong> klik avatar besar Anda → pilih emoji baru → simpan.</li>
+        <li><strong>Edit profil</strong> (tombol ✏️ Edit Profile):
+          <ul>
+            <li><strong>Ganti username saja</strong> → langsung tersimpan, tanpa OTP.</li>
+            <li><strong>Ganti email dan/atau password</strong> → wajib konfirmasi OTP 6 digit yang dikirim ke email Anda. Langkah keamanan ekstra agar orang lain tak bisa merubah kredensial akun Anda.</li>
+          </ul>
+        </li>
+      </ul>
+      <p>Tombol <kbd>← Back</kbd> mengembalikan Anda ke area chat.</p>
+    </section>
+
+    <section class="guide-section" id="g-block">
+      <h2>12. Blokir Pengguna</h2>
+      <ol>
+        <li>Buka profil pengguna lain (klik namanya di header chat, atau lewat Contacts).</li>
+        <li>Klik tombol blokir di halaman profilnya.</li>
+        <li>Setelah diblokir: Anda berdua tidak saling tampak di daftar kontak dan tidak bisa saling berkirim pesan.</li>
+        <li>Blokir bisa dibuka kembali (unblock) dari tempat yang sama.</li>
+      </ol>
+      <p>Contoh status yang mungkin tampil: "Blocked by you", "Has blocked you", "User Blocked You".</p>
+    </section>
+
+    <section class="guide-section" id="g-security">
+      <h2>13. Catatan Keamanan Penting</h2>
+      <ul>
+        <li><strong>Zero-knowledge server:</strong> server hanya menyimpan ciphertext. Isi pesan, Secret Key, dan hasil dekripsi tidak pernah menyentuh server.</li>
+        <li><strong>Secret Key = tanggung jawab Anda.</strong> Kunci hilang → pesan tak bisa dibaca siapa pun. Bagikan kunci hanya ke orang terpercaya, lewat kanal di luar aplikasi ini.</li>
+        <li><strong>Password akun</strong> disimpan sebagai hash bcrypt di server; tetap jangan pakai password yang sama dengan layanan lain.</li>
+        <li><strong>OTP via email</strong> melindungi perubahan email/password dan proses reset. Jangan bagikan kode OTP ke siapa pun.</li>
+        <li>Pesan terenkripsi aman tersimpan di server, tapi kekuatan enkripsi bergantung pada Secret Key Anda, pakai kunci panjang dan sulit ditebak.</li>
+      </ul>
+    </section>
+
+    <section class="guide-section" id="g-friends">
+      <h2>14. Menambahkan Kontak &amp; Permintaan Pertemanan</h2>
+      <ol>
+        <li>Buka <kbd>Contacts</kbd> → klik <kbd>Add Contact</kbd>.</li>
+        <li>Ketik username yang ingin ditambahkan; hasil pencarian muncul langsung.</li>
+        <li>Klik nama orangnya untuk mengirim permintaan pertemanan.</li>
+        <li>Yang dikirim melihat permintaan itu di menu Contacts, bagian <strong>Friend Requests</strong>, dan bisa menekan <kbd>Accept</kbd> (terima) atau <kbd>Reject</kbd> (tolak).</li>
+        <li>Begitu diterima, kalian saling muncul di daftar kontak dan bisa mulai chat.</li>
+      </ol>
+      <p class="note">Menambahkan kontak selalu butuh persetujuan orangnya — tidak ada yang bisa memaksa masuk daftar kontak Anda.</p>
+    </section>
+
+    <section class="guide-section" id="g-groups">
+      <h2>15. Grup Chat</h2>
+      <p><strong>Membuat grup:</strong></p>
+      <ol>
+        <li>Buka <kbd>Contacts</kbd> → <kbd>New Group</kbd>.</li>
+        <li>Isi nama grup, centang kontak yang mau dimasukkan, lalu klik <kbd>Create</kbd>. Anggota terpilih langsung masuk grup.</li>
+      </ol>
+      <p><strong>Chat grup:</strong> grup tampil di daftar Groups pada menu Contacts. Klik grup untuk membukanya. Enkripsinya sama persis dengan chat pribadi: tulis pesan → isi Secret Key → <kbd>ENCRYPT</kbd> → <kbd>▶</kbd>. Grup terakhir yang Anda buka diingat — refresh halaman tetap kembali ke grup yang sama.</p>
+      <p><strong>Group Info:</strong> klik nama grup di header obrolan. Di sana ada nama grup, jumlah anggota, dan daftar anggota — pembuat grup bertanda <strong>(admin)</strong>.</p>
+      <p><strong>Hak admin:</strong></p>
+      <ul>
+        <li><strong>Tambah Anggota</strong> — pilih kontak untuk diundang. Yang diundang <u>tidak langsung masuk</u>: undangan muncul di Contacts miliknya, bagian <strong>Group Invites</strong>, dan ia harus menekan <kbd>Join</kbd> (setuju) atau <kbd>Decline</kbd> (tolak). Masuk grup selalu atas persetujuan orangnya sendiri.</li>
+        <li><strong>Keluarkan anggota</strong> — tombol hapus di samping anggota non-admin pada daftar anggota.</li>
+        <li><strong>Bubarkan Grup</strong> — membubarkan grup dan menghapus seluruh keanggotaannya. Hanya admin.</li>
+      </ul>
+      <p class="note warn">⚠️ <strong>Keluar Grup</strong> meminta konfirmasi dan tidak bisa dibatalkan — untuk bergabung lagi, admin harus mengundang Anda ulang. Kalau yang keluar adalah admin, ia harus memilih pengganti admin dari anggota yang tersisa.</p>
+    </section>
+
+  </div>
+
+  <!-- ================= ENGLISH ================= -->
+  <div id="lang-en" style="display:none;">
+
+    <nav class="toc">
+      <strong style="color:#e4e6eb;">Table of Contents</strong>
+      <a href="#g-en-intro">1. About AegisChat</a>
+      <a href="#g-en-reg">2. Registration &amp; OTP Verification</a>
+      <a href="#g-en-login">3. Login</a>
+      <a href="#g-en-forgot">4. Forgot Password</a>
+      <a href="#g-en-contacts">5. Contacts</a>
+      <a href="#g-en-encrypt">6. Encrypting Messages (Manual)</a>
+      <a href="#g-en-decrypt">7. Decrypting Messages</a>
+      <a href="#g-en-file">8. Sending Images / Files</a>
+      <a href="#g-en-receipt">9. Read Receipts</a>
+      <a href="#g-en-delete">10. Deleting Messages (Single &amp; Bulk)</a>
+      <a href="#g-en-profile">11. Profile &amp; Account Settings</a>
+      <a href="#g-en-block">12. Blocking Users</a>
+      <a href="#g-en-security">13. Important Security Notes</a>
+      <a href="#g-en-friends">14. Adding Contacts (Approval Required)</a>
+      <a href="#g-en-groups">15. Group Chat</a>
+    </nav>
+
+    <section class="guide-section" id="g-en-intro">
+      <h2>1. About AegisChat</h2>
+      <p>AegisChat is a real-time chat application with end-to-end encryption (E2EE) that is <strong>fully manual and user-controlled</strong>, similar to PGP communication, but packaged in a chat interface.</p>
+      <p>Core principle: the server never knows what you say. It only receives, routes, and stores <em>ciphertext</em> (random-looking encrypted text). Your secret key is never sent to the server.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-reg">
+      <h2>2. Registration &amp; OTP Verification</h2>
+      <ol>
+        <li>Open the app's front page (<code>/</code>); you'll land on the registration form.</li>
+        <li>Fill in <strong>Username</strong>, <strong>Email</strong>, and <strong>Password</strong> (minimum 6 characters).</li>
+        <li>Pick an emoji avatar as your account's visual identity.</li>
+        <li>Submit the form. A <strong>6-digit OTP code will be emailed to you</strong>.</li>
+        <li>Open your email, copy the OTP, enter it on the verification page.</li>
+        <li>Confirm. Your account is now active and ready to log in.</li>
+      </ol>
+      <p class="note warn">⚠️ The OTP expires after <strong>10 minutes</strong> and can only be used once. If expired, register again or request a new code.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-login">
+      <h2>3. Login</h2>
+      <ol>
+        <li>Go to <code>/login</code>.</li>
+        <li>Enter your <strong>username or email</strong> and <strong>password</strong>.</li>
+        <li>Click <kbd>LOGIN</kbd>. On success you're redirected straight to the Chat page.</li>
+      </ol>
+      <p>Already logged in before? Reopening <code>/login</code> automatically redirects you to the chat page (session stored in your browser).</p>
+    </section>
+
+    <section class="guide-section" id="g-en-forgot">
+      <h2>4. Forgot Password</h2>
+      <ol>
+        <li>On the login page, click <kbd>Forgot Password?</kbd>.</li>
+        <li>Enter your account's email address.</li>
+        <li>Check your inbox: a 6-digit OTP will be sent.</li>
+        <li>Enter the OTP, then set a new password (min. 6 characters).</li>
+        <li>Log in with your new password.</li>
+      </ol>
+    </section>
+
+    <section class="guide-section" id="g-en-contacts">
+      <h2>5. Contacts</h2>
+      <ol>
+        <li>In the top navbar, click <kbd>Contacts</kbd>. A contact list window opens.</li>
+        <li>Use the search box to filter contacts by name.</li>
+        <li>Click a contact to open a conversation with them.</li>
+        <li>The chat partner's name in the conversation header is also clickable, it opens their profile page.</li>
+      </ol>
+      <p>The status bar under the navbar shows your local time and the logged-in username.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-encrypt">
+      <h2>6. Encrypting Messages (Manual)</h2>
+      <p>This is the required flow before sending any message:</p>
+      <table class="step-table">
+        <tr><td>Step 1</td><td>Type your message in the leftmost input field.</td></tr>
+        <tr><td>Step 2</td><td>Enter the <strong>Secret Key</strong> you agreed on with your chat partner. This key is <u>never sent to the server</u>.</td></tr>
+        <tr><td>Step 3</td><td>Click <kbd>ENCRYPT</kbd>. Your message turns into random-looking ciphertext in the input field.</td></tr>
+        <tr><td>Step 4</td><td>Click the <kbd>▶</kbd> button to send that ciphertext.</td></tr>
+      </table>
+      <p class="note">Encryption algorithm: <strong>AES-256</strong> (CryptoJS), processed 100% in your browser. The Secret Key field clears automatically after sending.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-decrypt">
+      <h2>7. Decrypting Messages</h2>
+      <ol>
+        <li>Incoming messages appear as random ciphertext, normal and intentional.</li>
+        <li>Click the <kbd>DECRYPT</kbd> button on the message bubble you want to read.</li>
+        <li>Enter the same Secret Key the sender used.</li>
+        <li>The original message replaces the ciphertext.</li>
+      </ol>
+      <p class="note warn">⚠️ Wrong key = decryption fails. Make sure both sides use the exact same Secret Key (including capitalization). Agree on keys through another channel (in person, phone call, etc.), never through this chat itself.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-file">
+      <h2>8. Sending Images / Files</h2>
+      <ol>
+        <li>Click the 📁 icon next to the input field.</li>
+        <li>Choose an image. Its name and size appear as a placeholder preview.</li>
+        <li>Don't forget the Secret Key, then click <kbd>▶</kbd> to send.</li>
+        <li>The image appears in the conversation and can be viewed by the recipient.</li>
+      </ol>
+    </section>
+
+    <section class="guide-section" id="g-en-receipt">
+      <h2>9. Read Receipts</h2>
+      <ul>
+        <li><kbd>✓</kbd>, message delivered, not yet read.</li>
+        <li><kbd>✓✓</kbd>, message has been read.</li>
+      </ul>
+    </section>
+
+    <section class="guide-section" id="g-en-delete">
+      <h2>10. Deleting Messages</h2>
+      <p><strong>Delete a single message:</strong> hover over your own message bubble and click the 🗑️ icon. It disappears instantly.</p>
+      <p><strong>Bulk delete:</strong></p>
+      <ol>
+        <li>Click <kbd>Select</kbd> in the chat header. Checkboxes appear on each of your deletable messages.</li>
+        <li>Tick every message you want removed.</li>
+        <li>Click <kbd>Delete (n)</kbd> to remove them all at once, or <kbd>Cancel</kbd> to abort.</li>
+        <li>When done, the button reverts to <kbd>Select</kbd>.</li>
+      </ol>
+      <p class="note warn">⚠️ 24-hour rule: messages can only be deleted within <strong>less than 24 hours of being sent</strong>, and only by the sender.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-profile">
+      <h2>11. Profile &amp; Account Settings</h2>
+      <p>Open via <kbd>Profile</kbd> in the navbar, or click a chat partner's name.</p>
+      <ul>
+        <li><strong>View profile:</strong> large avatar, display name, and @username.</li>
+        <li><strong>Change avatar:</strong> click your large avatar → pick a new emoji → save.</li>
+        <li><strong>Edit profile</strong> (✏️ Edit Profile button):
+          <ul>
+            <li><strong>Username-only change</strong> → saved instantly, no OTP needed.</li>
+            <li><strong>Email and/or password change</strong> → requires a 6-digit OTP sent to your email. This extra safeguard prevents others from changing your credentials.</li>
+          </ul>
+        </li>
+      </ul>
+      <p>The <kbd>← Back</kbd> button returns you to the chat area.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-block">
+      <h2>12. Blocking Users</h2>
+      <ol>
+        <li>Open another user's profile (click their name in the chat header, or via Contacts).</li>
+        <li>Click the block button on their profile page.</li>
+        <li>Once blocked: neither of you appears in each other's contact list, and messaging between you is disabled.</li>
+        <li>You can unblock later from the same place.</li>
+      </ol>
+      <p>Example statuses you may see: "Blocked by you", "Has blocked you", "User Blocked You".</p>
+    </section>
+
+    <section class="guide-section" id="g-en-security">
+      <h2>13. Important Security Notes</h2>
+      <ul>
+        <li><strong>Zero-knowledge server:</strong> only ciphertext is stored. Message contents, the Secret Key, and decrypted results never touch the server.</li>
+        <li><strong>The Secret Key is your responsibility.</strong> Lose it and nobody can ever read those messages again. Share keys only with trusted parties, outside this app.</li>
+        <li>Your <strong>account password</strong> is stored as a bcrypt hash server-side; still, don't reuse passwords from other services.</li>
+        <li><strong>Email OTP</strong> protects password/email changes and resets. Never share OTP codes with anyone.</li>
+        <li>Encrypted messages are safe at rest on the server, but encryption strength depends on your Secret Key, use long, hard-to-guess keys.</li>
+      </ul>
+    </section>
+
+    <section class="guide-section" id="g-en-friends">
+      <h2>14. Adding Contacts &amp; Friend Requests</h2>
+      <ol>
+        <li>Open <kbd>Contacts</kbd> → click <kbd>Add Contact</kbd>.</li>
+        <li>Type the username you want to add; matching results appear instantly.</li>
+        <li>Click their name to send a friend request.</li>
+        <li>The recipient sees it under Contacts → <strong>Friend Requests</strong> and can press <kbd>Accept</kbd> or <kbd>Reject</kbd>.</li>
+        <li>Once accepted, you both appear in each other's contact list and can start chatting.</li>
+      </ol>
+      <p class="note">Adding a contact always requires that person's approval — nobody can force their way into your contact list.</p>
+    </section>
+
+    <section class="guide-section" id="g-en-groups">
+      <h2>15. Group Chat</h2>
+      <p><strong>Creating a group:</strong></p>
+      <ol>
+        <li>Open <kbd>Contacts</kbd> → <kbd>New Group</kbd>.</li>
+        <li>Enter a group name, tick the contacts to include, then click <kbd>Create</kbd>. Selected members join immediately.</li>
+      </ol>
+      <p><strong>Group chat:</strong> groups appear in the Groups list inside the Contacts menu. Click a group to open it. Encryption works exactly like 1-on-1 chats: type your message → enter the Secret Key → <kbd>ENCRYPT</kbd> → <kbd>▶</kbd>. Your last opened group is remembered — refreshing the page returns you to the same group.</p>
+      <p><strong>Group Info:</strong> click the group name in the chat header. It shows the group name, member count, and the member list — the creator is tagged <strong>(admin)</strong>.</p>
+      <p><strong>Admin powers:</strong></p>
+      <ul>
+        <li><strong>Tambah Anggota (Add member)</strong> — pick a contact to invite. They do <u>not</u> join right away: the invite appears in their Contacts under <strong>Group Invites</strong>, and they must press <kbd>Join</kbd> (accept) or <kbd>Decline</kbd>. Joining a group always requires that person's consent.</li>
+        <li><strong>Remove member</strong> — the delete icon next to non-admin members in the member list.</li>
+        <li><strong>Bubarkan Grup (Dissolve)</strong> — dissolves the group and removes all memberships. Admin only.</li>
+      </ul>
+      <p class="note warn">⚠️ <strong>Leave group</strong> asks for confirmation and cannot be undone — to rejoin, an admin must invite you again. If the admin is the one leaving, they must first pick an admin successor from the remaining members.</p>
+    </section>
+
+  </div>
+
+</div>
+
+<div class="standalone-only" style="max-width:860px; margin:0 auto 60px; padding:0 20px;"><a class="back-login" href="/login">← Kembali ke Login</a></div>
+
+<button id="toTop" title="Ke atas / Back to top">↑</button>
+
+<script src="js/guide.js?v=20260825a"></script>
+
+</body>
+</html>
